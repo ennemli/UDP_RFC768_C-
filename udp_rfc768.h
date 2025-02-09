@@ -35,5 +35,12 @@ private:
 
                                 const struct sockaddr_in *destIP);
 
+public:
+  UDPSocket();
+  ~UDPSocket();
   bool bindSocket(const std::string &ip, uint16_t port);
+  bool sendTo(const std::string &destIP, uint16_t destPort, const char *data,
+              size_t length);
+  bool receiveFrom(std::string &srcIP, uint16_t &srcPort, char *buffer,
+                   size_t bufferSize);
 };
