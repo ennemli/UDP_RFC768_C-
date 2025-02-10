@@ -5,26 +5,13 @@
 #include <cstdlib>
 #include <cstring>
 #include <string>
-struct IPHeader {
-  uint8_t version : 4;
-  uint8_t ihl : 4;
-  uint8_t tos;
-  uint16_t total_length;
-  uint16_t id;
-  uint16_t fragment_offset;
-  uint8_t ttl;
-  uint8_t protocol;
-  uint16_t checksum;
-  uint32_t src_ip;
-  uint32_t dest_ip;
-};
-
+#define MAX_PACKET_BUFFER 65536
 struct UDPHeader {
   uint16_t source_port;
   uint16_t dest_port;
   uint16_t length;
   uint16_t checksum;
-};
+} __attribute__((packed));
 class UDPSocket {
 private:
   int sockfd;
@@ -34,6 +21,7 @@ private:
                                 size_t length, const struct sockaddr_in *srcIP,
 
                                 const struct sockaddr_in *destIP);
+  uint16_t calculateIPChecksum(struct ip *ipHeader);
 
 public:
   UDPSocket();
@@ -43,4 +31,6 @@ public:
               size_t length);
   bool receiveFrom(std::string &srcIP, uint16_t &srcPort, char *buffer,
                    size_t bufferSize);
+  void cleanUp();
+  int socketFd() { return sockfd; };
 };
