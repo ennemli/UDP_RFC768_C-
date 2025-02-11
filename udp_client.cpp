@@ -6,8 +6,9 @@
 #define SERVER_PORT 5000
 int main() {
   UDPSocket clientSocket;
-  clientSocket.bindSocket("127.0.0.2",
-                          657); // <- IP address must be diffrent from
+  clientSocket.bindSocket(
+      "127.0.0.2",
+      657); // <- IP address must be diffrent from IP address of the server
   std::string message = "Hello UDP Server!";
   // Send message to the server
   if (clientSocket.sendTo(SERVER_ADDR, SERVER_PORT, message.c_str(),
