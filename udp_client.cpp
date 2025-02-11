@@ -3,11 +3,12 @@
 #include <iostream>
 #include <string>
 #define SERVER_ADDR "127.0.0.1"
-#define SERVER_PORT 5122
+#define SERVER_PORT 5000
 int main() {
   UDPSocket clientSocket;
+  clientSocket.bindSocket("127.0.0.2",
+                          657); // <- IP address must be diffrent from
   std::string message = "Hello UDP Server!";
-  clientSocket.bindSocket("127.0.0.5", 4090);
   // Send message to the server
   if (clientSocket.sendTo(SERVER_ADDR, SERVER_PORT, message.c_str(),
                           message.size())) {

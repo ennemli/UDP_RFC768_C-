@@ -113,7 +113,7 @@ bool UDPSocket::receiveFrom(std::string &srcIP, uint16_t &srcPort, char *buffer,
 
   ssize_t bytesReceived = recvfrom(sockfd, recvBuffer, sizeof(recvBuffer), 0,
                                    (struct sockaddr *)&senderAddr, &addrLen);
-  if (bytesReceived < 0) {
+  if (bytesReceived <= 0) {
 
     return false;
   }
