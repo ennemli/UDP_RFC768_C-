@@ -1,7 +1,6 @@
 #include "udp_rfc768.h"
 #include "arpa/inet.h"
 #include "netinet/ip.h"
-#include <csignal>
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
